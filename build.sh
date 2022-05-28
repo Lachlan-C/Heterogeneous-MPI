@@ -14,7 +14,7 @@ do
     then
         # Copy executiable with name of ARCH and rename to executable
         scp MPI-CODE/$ARCH pi@${server}:/home/pi/Heterogeneous-MPI/MPI-CODE/C-Code
-        ssh pi@${server} 'mv Heterogeneous-MPI/MPI-Code/$ARCH Heterogeneous-MPI/MPI-Code/C-Code/$1'
+        ssh pi@${server} 'mv Heterogeneous-MPI/MPI-CODE/$ARCH Heterogeneous-MPI/MPI-CODE/C-Code/$1'
 
     else
 
@@ -22,7 +22,8 @@ do
         scp MPI-CODE/C-Code/$1 pi@${server}:/home/pi
         
         #build code
-        ssh pi@${server} 'mpicc $1 -o $ARCH'
+        ssh pi@${server} 'mpicc $1'
+        ssh pi@${server} 'mv a.out $1'
         echo $ARCH
 
         #copy back to main node
@@ -31,10 +32,6 @@ do
         #copy and rename locally to executable 
         ssh pi@${server} 'mv $ARCH Heterogeneous-MPI/MPI-CODE/C-Code'
         ssh pi@${server} 'mv $ARCH $1 | rev | cut -c 3- | rev'
-       
-
-        #clean up after build
-        ssh pi@${server} 'rm Heterogeneous-MPI/MPI-CODE/C-Code'
 
         #ADD to list
         KNOWN_ARCHS=$KNOWN_ARCHS" "$ARCH; 
