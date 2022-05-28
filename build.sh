@@ -22,7 +22,7 @@ do
         scp MPI-CODE/C-Code/$1 pi@${server}:/home/pi
         
         #build code
-        ssh pi@${server} 'mpicc ${1} -o $ARCH'
+        ssh pi@${server} 'mpicc $1 -o $ARCH'
         echo $ARCH
 
         #copy back to main node
