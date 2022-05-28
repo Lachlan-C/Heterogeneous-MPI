@@ -31,11 +31,8 @@ for server in $(cat servers) ; do ssh $username@${server} 'mkdir -p ~/Heterogene
 #setup host file on eack worker node
 for server in $tail ; do scp servers $username@${server}:/home/$username/Heterogeneous-MPI ; done
 
-
-
-
-
-
+#copy over code to each of the worker nodes
+for server in $tail ; do scp MPI-CODE/* $username@${server}:/home/$username/Heterogeneous-MPI/MPI-CODE ; done
 
 #get architecture
 #ARCH=$(ssh pi@ip_address 'uname -a | rev | cut -d "' '" -f 2 | rev')
