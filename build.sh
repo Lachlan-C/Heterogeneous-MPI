@@ -23,7 +23,7 @@ do
         
         #build code
         ssh pi@${server} "mpicc $1 -o $ARCH"
-        echo $ARCH
+        echo "mpicc $1 -o $ARCH"
 
         #copy back to main node
         ssh -A pi@${server} "scp $ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE"
