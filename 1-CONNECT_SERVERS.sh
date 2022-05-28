@@ -25,9 +25,9 @@ all=$(cat servers)
 #setup main to connect to workers
 ./setup_keys.sh $tail
 
-#echo manually run these commands
-eval $(ssh-agent)
-ssh-add id_rsa 
+echo manually run these commands
+echo 'eval $(ssh-agent)'
+echo 'ssh-add id_rsa' 
 
 #get architecture
 #ARCH=$(ssh pi@ip_address 'uname -a | rev | cut -d "' '" -f 2 | rev')
