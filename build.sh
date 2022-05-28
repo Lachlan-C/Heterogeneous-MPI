@@ -20,12 +20,10 @@ do
 
         #copy code
         scp MPI-CODE/C-Code/$1 pi@${server}:/home/pi
-        wait $!
+     
         #build code
-        echo  ssh pi@${server} "mpicc $1 -o $ARCH"
-        ssh pi@${server} "mpicc $1 -o $ARCH"
+        ssh pi@${server} "$(mpicc $1 -o $ARCH)"
         
-
         #copy back to main node
         ssh -A pi@${server} "scp $ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE"
 
