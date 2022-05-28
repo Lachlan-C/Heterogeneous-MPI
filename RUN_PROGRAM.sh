@@ -20,10 +20,10 @@ tail=$(tail -n $num servers)
 all=$(cat servers)
 
 #setup main to connect to workers
-bash -s ./setup_connections.sh $tail
+exec ./setup_connections.sh $tail
 
 #setup main to connect to workers
-bash -s ./setup_keys.sh $tail
+exec ./setup_keys.sh $tail
 
 #create requried directories on  each node
 for server in $(cat servers) ; do ssh $username@${server} 'mkdir -p ~/Heterogeneous-MPI/MPI-CODE' ; done
