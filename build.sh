@@ -1,5 +1,6 @@
 #setup env variables
 main=$(head -n 1 servers)
+num=$(cat servers | wc -l)
 tail=$(tail -n $num servers)
 all=$(cat servers)
 
@@ -7,6 +8,7 @@ KNOWN_ARCHS=""
 for server in $all ; 
 do 
     ARCH=$(ssh pi@${server} 'uname -a | rev | cut -d "' '" -f 2 | rev');
+    echo $ARCH
     if (echo "$KNOWN_ARCHS" | fgrep -qw $ARCH);
     
     then
