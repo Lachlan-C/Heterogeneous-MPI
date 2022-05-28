@@ -27,7 +27,7 @@ all=$(cat servers)
 
 #echo manually run these commands
 eval $(ssh-agent)
-ssh-add ../id_rsa 
+ssh-add id_rsa 
 
 #get architecture
 #ARCH=$(ssh pi@ip_address 'uname -a | rev | cut -d "' '" -f 2 | rev')
