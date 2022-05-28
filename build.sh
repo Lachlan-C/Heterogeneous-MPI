@@ -19,7 +19,8 @@ do
     else
 
         #copy code
-        scp MPI-Code/C-Code/$1 pi@${server}:/home/pi
+        scp MPI-CODE/C-Code/$1 pi@${server}:/home/pi
+        
         #build code
         ssh pi@${server} 'mpicc ${1} -o $ARCH'
         echo $ARCH

@@ -20,10 +20,10 @@ tail=$(tail -n $num servers)
 all=$(cat servers)
 
 #setup main to connect to workers
-./setup_connections.sh $tail
+./setup_connections.sh $all
 
 #setup main to connect to workers
-./setup_keys.sh $tail
+./setup_keys.sh $all
 
 echo manually run these commands
 echo 'eval $(ssh-agent)'
