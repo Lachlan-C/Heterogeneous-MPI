@@ -26,11 +26,11 @@ do
         ssh pi@${server} cd /home/pi/Heterogeneous-MPI ; $(mpicc $1 -o $ARCH)
         
         #copy back to main node
-        ssh -A pi@${server} cd /home/pi/Heterogeneous-MPI ; scp $ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE
+        ssh -A pi@${server} scp /home/pi/Heterogeneous-MPI/$ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE
 
         #copy and rename locally to executable 
-        ssh pi@${server} cd /home/pi/Heterogeneous-MPI ; mv $ARCH MPI-CODE/C-Code/
-        ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code ; mv $ARCH $1 | rev | cut -c 3- | rev
+        ssh pi@${server} cd  ; mv /home/pi/Heterogeneous-MPI/$ARCH /home/pi/Heterogeneous-MPIMPI-CODE/C-Code/
+        ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code ; mv /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$($1 | rev | cut -c 3- | rev)
 
         #ADD to list
         KNOWN_ARCHS=$KNOWN_ARCHS" "$ARCH; 
