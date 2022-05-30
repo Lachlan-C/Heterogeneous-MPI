@@ -30,15 +30,15 @@ do
         
         #build code
         echo "build code on new node"
-        ssh pi@${server} $(mpicc /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$1 -o /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH)
+        ssh pi@${server} "mpicc /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$1 -o /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH"
         
         #copy back to main node
         echo "copy code back to main node"
-        ssh -A pi@${server} scp /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE
+        ssh -A pi@${server} scp /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE
 
         #copy and rename locally to executable
         echo "Move compiled to correct place"
-        ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/
+        ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/
         echo "rename compile"
         ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled ; mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$filename
 
