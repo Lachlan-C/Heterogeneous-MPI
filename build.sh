@@ -9,6 +9,7 @@ for server in $all ;
 do 
     ARCH=$(ssh pi@${server} 'uname -a | rev | cut -d "' '" -f 2 | rev');
     echo $ARCH
+    echo $($1 | rev | cut -c 3- | rev)
     if (echo "$KNOWN_ARCHS" | fgrep -qw $ARCH);
     
     then
