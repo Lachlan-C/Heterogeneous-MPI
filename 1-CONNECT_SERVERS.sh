@@ -25,6 +25,9 @@ all=$(cat servers)
 #setup main to connect to workers
 ./setup_keys.sh $all
 
+#setup connections back to main node
+./setup_back_connection.sh $all
+
 echo manually run these commands
 echo 'eval $(ssh-agent)'
 echo 'ssh-add id_rsa' 
