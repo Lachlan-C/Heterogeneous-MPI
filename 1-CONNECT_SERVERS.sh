@@ -26,7 +26,7 @@ all=$(cat servers)
 ./setup_keys.sh $all
 
 #setup connections back to main node
-./setup_back_connection.sh $all
+#./setup_back_connection.sh $all
 
 echo manually run these commands
 echo 'eval $(ssh-agent)'
