@@ -4,7 +4,9 @@ num=$(cat servers | wc -l)
 tail=$(tail -n $num servers)
 all=$(cat servers)
 codefile=$1
+echo codefile
 filename= $(echo $1 | rev | cut -c 3- | rev)
+echo filename
 
 KNOWN_ARCHS=""
 for server in $all ; 
