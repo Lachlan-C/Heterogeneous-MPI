@@ -37,10 +37,10 @@ do
         ssh -A pi@${server} scp /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE
 
         #copy and rename locally to executable
-        echo "Move compiled to correct place"
-        ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/
+        #echo "Move compiled to correct place"
+        #ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/
         echo "rename compile"
-        ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled ; mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$filename
+        ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$filename
 
         #ADD to list
         KNOWN_ARCHS=$KNOWN_ARCHS" "$ARCH; 
