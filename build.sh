@@ -36,10 +36,7 @@ do
         ssh pi@${server} "mpicc /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$codefile -o /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH"
         
         #copy back to main node
-        echo "copy code back to main node"
-        eval $(ssh-agent)
-        ssh-add id_rsa
-        ssh -A pi@${server} scp /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE
+        scp $ARCH pi@${server}:/home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/ /home/pi/Heterogeneous-MPI/MPI-CODE
 
         #copy and rename locally to executable
         #echo "Move compiled to correct place"
