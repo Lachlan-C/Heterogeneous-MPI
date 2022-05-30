@@ -4,12 +4,13 @@ num=$(cat servers | wc -l)
 tail=$(tail -n $num servers)
 all=$(cat servers)
 
+filename=$@ | rev | cut -c 3- | rev
+
 KNOWN_ARCHS=""
 for server in $all ; 
 do 
     ARCH=$(ssh pi@${server} 'uname -a | rev | cut -d "' '" -f 2 | rev');
     echo $ARCH
-    filename=$1 | rev | cut -c 3- | rev
     echo $filename
     if (echo "$KNOWN_ARCHS" | fgrep -qw $ARCH);
     
@@ -19,18 +20,18 @@ do
         echo "copy over compiled code"
         scp MPI-CODE/$ARCH pi@${server}:/home/pi/Heterogeneous-MPI/MPI-CODE/Compiled
         echo "rename compile"
-        ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$1
+        ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$@
 
     else
         echo "new node arch detected"
         #copy code
         echo "copy code to target machine"
-        scp MPI-CODE/C-Code/$1 pi@${server}:/home/pi/Heterogeneous-MPI/MPI-CODE/C-Code
+        scp MPI-CODE/C-Code/$@ pi@${server}:/home/pi/Heterogeneous-MPI/MPI-CODE/C-Code
 
         
         #build code
         echo "build code on new node"
-        ssh pi@${server} "mpicc /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$1 -o /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH"
+        ssh pi@${server} "mpicc /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$@ -o /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH"
         
         #copy back to main node
         echo "copy code back to main node"
