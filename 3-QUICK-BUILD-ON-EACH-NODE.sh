@@ -9,4 +9,4 @@ filename=$(echo $1 | rev | cut -c 3- | rev)
 for server in $tail ; do scp MPI-CODE/C-Code/$1 pi@${server}:/home/pi/Heterogeneous-MPI/MPI-CODE/C-Code ; done
 
 #build on each worker node
-for server in $all ; do ssh pi@${server} mpicc /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$! -o /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$!; done
+for server in $all ; do ssh pi@${server} mpicc /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$1 -o /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$filename; done
