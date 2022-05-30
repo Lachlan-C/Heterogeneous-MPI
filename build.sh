@@ -30,7 +30,7 @@ do
         
         #build code
         echo "build code on new node"
-        ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code; $(mpicc $1 -o $ARCH)
+        ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code;echo pwd; echo ls; $(mpicc $1 -o $ARCH)
         
         #copy back to main node
         echo "copy code back to main node"
