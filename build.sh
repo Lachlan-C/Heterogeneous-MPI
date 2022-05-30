@@ -10,7 +10,7 @@ do
     ARCH=$(ssh pi@${server} 'uname -a | rev | cut -d "' '" -f 2 | rev');
     echo $ARCH
     filename=$1 | rev | cut -c 3- | rev
-    echo $1 | rev | cut -c 3- | rev
+    echo $filename
     if (echo "$KNOWN_ARCHS" | fgrep -qw $ARCH);
     
     then
@@ -39,7 +39,7 @@ do
         #copy and rename locally to executable
         #echo "Move compiled to correct place"
         #ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/
-        echo "rename compile"
+        echo "rename compile from $ARCH to $filename"
         ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$filename
 
         #ADD to list
