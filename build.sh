@@ -35,6 +35,8 @@ do
         
         #copy back to main node
         echo "copy code back to main node"
+        eval $(ssh-agent)
+        ssh-add id_rsa
         ssh -A pi@${server} scp /home/pi/Heterogeneous-MPI/MPI-CODE/Compiled/$ARCH pi@${main}:/home/pi/Heterogeneous-MPI/MPI-CODE
 
         #copy and rename locally to executable
