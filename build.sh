@@ -14,7 +14,7 @@ do
     then
         # Copy executiable with name of ARCH and rename to executable
         scp MPI-CODE/$ARCH pi@${server}:/home/pi/Heterogeneous-MPI/MPI-CODE/C-Code
-        ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code ; mv $ARCH $1
+        ssh pi@${server} mv /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$1
 
     else
 
