@@ -9,6 +9,7 @@ for server in $all ;
 do 
     ARCH=$(ssh pi@${server} 'uname -a | rev | cut -d "' '" -f 2 | rev');
     echo $ARCH
+    filename=($1 | rev | cut -c 3- | rev)
     echo $1 | rev | cut -c 3- | rev
     if (echo "$KNOWN_ARCHS" | fgrep -qw $ARCH);
     
@@ -39,7 +40,7 @@ do
         echo "Move compiled to correct place"
         ssh pi@${server} mv /home/pi/Heterogeneous-MPI/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/
         echo "rename compile"
-        ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code ; mv /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$1 | rev | cut -c 3- | rev
+        ssh pi@${server} cd /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code ; mv /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$ARCH /home/pi/Heterogeneous-MPI/MPI-CODE/C-Code/$filename
 
         #ADD to list
         KNOWN_ARCHS=$KNOWN_ARCHS" "$ARCH; 
