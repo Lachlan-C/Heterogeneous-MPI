@@ -3,8 +3,8 @@ main=$(head -n 1 servers)
 num=$(cat servers | wc -l)
 tail=$(tail -n $num servers)
 all=$(cat servers)
-codefile=$@
-filename= $(echo $@ | rev | cut -c 3- | rev)
+codefile=$1
+filename= $(echo $1 | rev | cut -c 3- | rev)
 
 KNOWN_ARCHS=""
 for server in $all ; 
